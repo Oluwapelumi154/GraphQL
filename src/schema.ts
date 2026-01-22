@@ -26,4 +26,18 @@ type Query {
     authors: [Author],
     author(id: ID!): Author
 }
+type Mutation {
+   deleteGame(id: ID!): [Game],
+   addGame(game: AddGameInput!): Game,
+   game(id: ID!, edits: editGameInput!): Game
+}
+input AddGameInput {
+    title: String!,
+    platform: [String!]!
+}
+
+input editGameInput {
+    title: String,
+    platform: [String!]
+}
 `;

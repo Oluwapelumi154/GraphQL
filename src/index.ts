@@ -24,6 +24,29 @@ const resolvers = {
       return Authors.find((author) => author.id === args.id);
     },
   },
+  Mutation: {
+    deleteGame(_, args) {
+      const res = Games.filter((el) => el.id !== args.id);
+      return res;
+    },
+    addGame(_, args) {
+      const game = {
+        ...args.game,
+        id: Math.floor(Math.random() * 100000).toString(),
+      };
+      Games.push(game);
+      return game;
+    },
+    game(_, args) {
+      Games.map((game) => {
+        if (game.id === args.id) {
+          return { ...game, ...args.edit };
+        }
+        return game;
+      });
+      return Games.find((g) => g.id === args.id);
+    },
+  },
   Game: {
     reviews(parent) {
       return Reviews.filter((r) => r.game_id === parent.id);
